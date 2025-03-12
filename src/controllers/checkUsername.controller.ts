@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { prisma, asyncHandler, ApiError, ApiResponse } from "../utils/index";
-import { usernameSchema } from "@repo/zod";
+import { usernameSchema } from "../utils/validation";
 
 export const checkUsername = asyncHandler(
   async (req: Request, res: Response) => {

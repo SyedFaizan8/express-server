@@ -7,9 +7,8 @@ import {
   REFRESH_SECRET,
   SALT_ROUNDS,
   options,
-  IMAGEKIT_PUBLIC_KEY,
-  IMAGEKIT_PRIVATE_KEY,
-  IMAGEKIT_URL_ENDPOINT,
+  refreshTokenOptions,
+  accessTokenOptions
 } from "./constants";
 import {
   hashPassword,
@@ -33,7 +32,6 @@ export {
   generateAcessToken,
   generateRefreshToken,
   generateAccessAndRefereshTokens,
-  IMAGEKIT_PUBLIC_KEY,
-  IMAGEKIT_PRIVATE_KEY,
-  IMAGEKIT_URL_ENDPOINT,
+  accessTokenOptions,
+  refreshTokenOptions
 };

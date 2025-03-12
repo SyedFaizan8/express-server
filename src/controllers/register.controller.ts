@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { registerSchema } from "@repo/zod";
+import { registerSchema } from "../utils/validation";
 
 import {
   prisma,
@@ -56,6 +56,7 @@ export const registerUser = asyncHandler(
           total_tests_taken: 0,
           total_letters_typed: 0,
           total_words_typed: 0,
+          total_time_typing: 0,
         },
       });
 

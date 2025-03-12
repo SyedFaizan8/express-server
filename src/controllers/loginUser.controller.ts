@@ -1,12 +1,13 @@
 import { Request, Response } from "express";
-import { loginSchema } from "@repo/zod";
+import { loginSchema } from "../utils/validation";
 
 import {
   prisma,
   ApiError,
   ApiResponse,
   asyncHandler,
-  options,
+  accessTokenOptions,
+  refreshTokenOptions,
   comparePassword,
   generateAccessAndRefereshTokens,
 } from "../utils/index";
@@ -25,7 +26,7 @@ export const loginUser = asyncHandler(async (req: Request, res: Response) => {
         user_id: true,
         password: true,
         username: true,
-        imageUrl: true,
+        imageId: true,
       },
     });
     if (!user) throw new ApiError(404, "User not found");
@@ -41,8 +42,8 @@ export const loginUser = asyncHandler(async (req: Request, res: Response) => {
 
     return res
       .status(200)
-      .cookie("accessToken", accessToken, options)
-      .cookie("refreshToken", refreshToken, options)
+      .cookie("accessToken", accessToken, accessTokenOptions)
+      .cookie("refreshToken", refreshToken, refreshTokenOptions)
       .json(
         new ApiResponse(200, userIdFullname, "User logged in successfully"),
       );

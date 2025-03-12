@@ -14,12 +14,13 @@ export const leaderboard = asyncHandler(async (req, res) => {
         user: {
           select: {
             username: true,
-            imageUrl: true,
+            imageId: true,
           },
         },
         highest_wpm: true,
         highest_accuracy: true,
         achieved_at: true,
+        time: true
       },
     });
 

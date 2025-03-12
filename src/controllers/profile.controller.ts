@@ -7,7 +7,7 @@ export const profile = asyncHandler(async (req, res) => {
     const user = await prisma.user.findUnique({
       where: { username },
       select: {
-        imageUrl: true,
+        imageId: true,
         fullname: true,
         username: true,
         created_at: true,
@@ -18,6 +18,7 @@ export const profile = asyncHandler(async (req, res) => {
             total_tests_taken: true,
             total_letters_typed: true,
             total_words_typed: true,
+            total_time_typing: true
           },
         },
         leaderboard: {
@@ -25,6 +26,7 @@ export const profile = asyncHandler(async (req, res) => {
             highest_wpm: true,
             highest_accuracy: true,
             achieved_at: true,
+            time: true
           },
         },
         history: {
@@ -42,8 +44,8 @@ export const profile = asyncHandler(async (req, res) => {
 
     const userRank = user.leaderboard
       ? (await prisma.leaderboard.count({
-          where: { highest_wpm: { gt: user.leaderboard?.highest_wpm } },
-        })) + 1
+        where: { highest_wpm: { gt: user.leaderboard?.highest_wpm } },
+      })) + 1
       : null;
 
     return res

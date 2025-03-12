@@ -7,7 +7,7 @@ export const getUser = asyncHandler(async (req: AuthRequest, res) => {
   try {
     const user = await prisma.user.findUnique({
       where: { user_id },
-      select: { user_id: true, username: true, imageUrl: true },
+      select: { user_id: true, username: true, imageId: true },
     });
 
     return res

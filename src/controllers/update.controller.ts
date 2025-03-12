@@ -137,18 +137,18 @@ export const updateSocials = asyncHandler(async (req: AuthRequest, res) => {
 
 export const updateDp = asyncHandler(async (req: AuthRequest, res) => {
   const user_id = req.user?.user_id;
-  const { imageUrl } = req.body; //zod fix
+  const { imageId } = req.body; //zod fix
 
-  if (!imageUrl.trim()) throw new ApiError(400, "imageUrl is required");
-  const updatedImageUrl = await prisma.user.update({
+  if (!imageId.trim()) throw new ApiError(400, "imageId is required");
+  const updatedimageId = await prisma.user.update({
     where: { user_id },
-    data: { imageUrl: imageUrl.trim() },
-    select: { imageUrl: true },
+    data: { imageId: imageId.trim() },
+    select: { imageId: true },
   });
 
   return res
     .status(200)
-    .json(new ApiResponse(200, updatedImageUrl, "DP uploaded successfully"));
+    .json(new ApiResponse(200, updatedimageId, "DP uploaded successfully"));
 });
 
 export const resetAccount = asyncHandler(async (req: AuthRequest, res) => {
@@ -167,6 +167,7 @@ export const resetAccount = asyncHandler(async (req: AuthRequest, res) => {
           total_letters_typed: 0,
           total_tests_taken: 0,
           total_words_typed: 0,
+          total_time_typing: 0,
         },
       }),
       prisma.leaderboard.deleteMany({ where: { user_id } }),

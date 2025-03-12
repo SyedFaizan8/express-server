@@ -2,13 +2,13 @@ import { prisma, ApiError, ApiResponse, asyncHandler } from "../utils/index";
 
 export const getProfile = asyncHandler(async (req, res) => {
   const { username } = req.params;
-  if (username === undefined) throw new ApiError(404, "User is undefined");
+  if (!username) throw new ApiError(404, "User is not found");
 
   try {
     const user = await prisma.user.findUnique({
       where: { username },
       select: {
-        imageUrl: true,
+        imageId: true,
         fullname: true,
         username: true,
         email: true,

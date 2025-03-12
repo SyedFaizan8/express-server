@@ -7,8 +7,7 @@ dotenv.config({
   path: "./.env",
 });
 
-const app = express();
-const PORT = process.env.PORT || 8000;
+export const app = express();
 
 app.use(
   cors({
@@ -29,7 +28,5 @@ import errorHandler from "./middlewares/errorHandler";
 app.use("/api", userRouter);
 app.use("/api/user", userUpdate);
 app.use(errorHandler);
-
-app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
 
 export default app;

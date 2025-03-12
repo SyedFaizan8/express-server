@@ -9,6 +9,22 @@ export const options = {
   secure: true,
 };
 
+export const accessTokenOptions = {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production",
+  sameSite: "strict",
+  path: "/",
+  maxAge: 60 * 60 * 24,
+} as const;
+
+export const refreshTokenOptions = {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production",
+  sameSite: "strict",
+  path: "/",
+  maxAge: 60 * 60 * 24 * 10,
+} as const;
+
 export const IMAGEKIT_PUBLIC_KEY = process.env.IMAGEKIT_PUBLIC_KEY as string;
 
 export const IMAGEKIT_PRIVATE_KEY = process.env.IMAGEKIT_PRIVATE_KEY as string;
